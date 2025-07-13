@@ -12,3 +12,13 @@ A fundraising token for MC3.  Doners can purchase MC3 tokens which will be excha
 1. Implement a useful [bonding curve](https://www.coinbase.com/learn/advanced-trading/what-is-a-bonding-curve).
 2. Currently we only allow token purchanes in units of ETH - should we also allow exchanges for stable coins?
 3. Refine admin privileges.
+
+
+### Deployments
+
+#### Sepolia
+***2025-07-13***
+
+MC3Coin: 0xECA785CE55d880357b02295e2e5eC413c20Aa2AA 
+
+Treasury: 0x05f2d7730E8cb54614c1EcBbB340CBC8a3247552
