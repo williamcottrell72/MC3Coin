@@ -19,6 +19,10 @@ A fundraising token for MC3.  Doners can purchase MC3 tokens which will be excha
 #### Sepolia
 ***2025-07-13***
 
-MC3Coin: 0xECA785CE55d880357b02295e2e5eC413c20Aa2AA 
+##### MC3Coin: 
+0xECA785CE55d880357b02295e2e5eC413c20Aa2AA 
 
-Treasury: 0x05f2d7730E8cb54614c1EcBbB340CBC8a3247552
+##### Treasury: 
+
+0x05f2d7730E8cb54614c1EcBbB340CBC8a3247552    
+0xf62AbA2F4999cCc4453e28C1318F4E4B5aFE4000   // 20250715
