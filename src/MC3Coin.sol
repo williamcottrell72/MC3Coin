@@ -2,24 +2,27 @@
 
 pragma solidity ^0.8.20;
 
-// For more information on the underlying token standard:
-// https://eips.ethereum.org/EIPS/eip-20
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract MC3Coin is ERC20 {
+
+    mapping(address => bool) public token_admin;
+
     constructor() ERC20("MC3 Coin", "MC3") {
         // Here we define total supply
-        _mint(msg.sender, (10 ** uint256(decimals())));
+        _mint(msg.sender, (1e6 * 10 ** uint256(decimals())));
         token_admin[msg.sender] = true;
     }
 
-    // Defines administrative permissions for token -
-    // specifically, who is allowed to mint new tokens.
-    mapping(address => bool) public token_admin;
+    function decimals() public view virtual override returns (uint8) {
+        return 8;
+    }
 
     function addAdmin(address _adminAddress) public onlyAdmin {
+        // Defines administrative permissions for token -
+        // specifically, who is allowed to mint new tokens.
         require(token_admin[_adminAddress] != true, "Address already admin.");
         token_admin[_adminAddress] = true;
     }
@@ -132,19 +135,22 @@ contract MC3Treasury {
 
         // Note, we can't work with decimals, so specifying things in units
         // of some larger quantity is a work-around.
-        uint256 tokensPerThousandDollars = 100;
+
+        uint8 decimals = 8; // Assuming 8 decimals for MC3Coin
+
+        uint256 tokensPerMillionDollars = (10**decimals) / tokenPriceUsd;
 
         uint256 priceInDollars = this.getEthPrice();
 
-        return (priceInDollars * (tokensPerThousandDollars)) / 1000;
+        return (priceInDollars * (tokensPerMillionDollars));
     }
 
     function buyToken() public payable returns (bool) {
         // A mechanism to directly purchase tokens with eth.
         // uint256 sent_value_in_eth = SafeMath.div(msg.value, 1 ether, "Conversion error.");
         uint256 sent_value_in_eth = msg.value / 1 ether;
-        uint256 num_tokens = sent_value_in_eth * this.EthToTokenConversionFactor();
-        token.transfer(msg.sender, num_tokens);
+        uint256 num_micro_tokens = sent_value_in_eth * this.EthToTokenConversionFactor();
+        token.transfer(msg.sender, num_micro_tokens);
         return true;
     }
 
