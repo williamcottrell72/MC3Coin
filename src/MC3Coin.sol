@@ -6,7 +6,6 @@ pragma solidity ^0.8.20;
 // https://eips.ethereum.org/EIPS/eip-20
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-// import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract MC3Coin is ERC20 {
@@ -43,9 +42,23 @@ contract MC3Coin is ERC20 {
 contract MC3Treasury {
     IERC20 token;
     AggregatorV3Interface internal ethDataFeed;
-
+    uint256 public tokenPriceUsd = 1e6;
+    bool public isLatest = true;
+    address[] public token_holders;
+    
     // Mapping of owner addresses and their permissions (in this case, just one permission)
     mapping(address => bool) public admin;
+
+    constructor(address _tokenAddress) {
+        token = IERC20(_tokenAddress);
+        addAdmin(msg.sender);
+
+        // Chainlink mainnet data feed for ETH/USD price.
+        // ethDataFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
+
+        // Chainlink sepolia testnet data feed for ETH/USD price.
+        ethDataFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+    }
 
     function addAdmin(address _adminAddress) public {
         require(admin[_adminAddress] != true);
@@ -60,16 +73,6 @@ contract MC3Treasury {
     modifier onlyAdmin() {
         require(admin[msg.sender]);
         _;
-    }
-
-    constructor(address _tokenAddress) {
-        token = IERC20(_tokenAddress);
-        addAdmin(msg.sender);
-
-        // ethDataFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
-
-        // sepolia
-        ethDataFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
     }
 
     function getEthPrice() public view returns (uint256) {
@@ -105,9 +108,22 @@ contract MC3Treasury {
         token.transfer(_to, _amount);
     }
 
-    function getBalance() external view returns (uint256) {
+    function getTreasuryBalance() external view returns (uint256) {
         return token.balanceOf(address(this));
     }
+
+    function getBalance(address address_) external view returns (uint256) {
+        // Returns the balance of the contract in ETH.
+        return token.balanceOf(address_);
+    }
+
+    function setTokenPrice(uint256 _price) external onlyAdmin {
+        // This function can be used to set the price of the token.
+        // Currently, we are not implementing this as a state variable.
+        // Instead, we use the Chainlink data feed to get the ETH price.
+        // This is a placeholder for future functionality.
+    }
+
 
     function EthToTokenConversionFactor() external view returns (uint256) {
         // We can implement an arbitrary function here specifying
@@ -131,4 +147,12 @@ contract MC3Treasury {
         token.transfer(msg.sender, num_tokens);
         return true;
     }
+
+    function recieve() external payable {
+        // If no specific function is called, we assume this is a buyToken call.
+        this.buyToken();
+
+    }
+
+
 }

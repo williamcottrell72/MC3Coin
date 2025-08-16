@@ -14,15 +14,20 @@ A fundraising token for MC3.  Doners can purchase MC3 tokens which will be excha
 3. Refine admin privileges.
 
 
-### Deployments
+## Deployments
 
-#### Sepolia
-***2025-07-13***
+### <ins>Sepolia Testnet</ins>
 
-##### MC3Coin: 
-0xECA785CE55d880357b02295e2e5eC413c20Aa2AA 
 
-##### Treasury: 
+##### MC3 ERC20 Token: 
+[2025-07-13](https://sepolia.etherscan.io/address/0xECA785CE55d880357b02295e2e5eC413c20Aa2AA)
+[2025-07-27](https://sepolia.etherscan.io/address/0x24dbba52fc9815e55e13d1d688f6861c03f45dac)
 
-0x05f2d7730E8cb54614c1EcBbB340CBC8a3247552    
-0xf62AbA2F4999cCc4453e28C1318F4E4B5aFE4000   // 20250715
+
+##### Treasury Contract: 
+
+[2025-07-13](https://sepolia.etherscan.io/address/0x05f2d7730e8cb54614c1ecbbb340cbc8a3247552)
+[2025-07-15](https://sepolia.etherscan.io/address/0xf62AbA2F4999cCc4453e28C1318F4E4B5aFE4000)
+[2025-08-16](https://sepolia.etherscan.io/address/0x2051b68F05Ef05EB152e0C193ddDa745cb36F564)
+
+Latest release commit [here](https://github.com/williamcottrell72/MC3Coin/commit/67c8a9a2bdd78367ad0ddb3dcfabe347c6aa9980).

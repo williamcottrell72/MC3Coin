@@ -4,6 +4,15 @@ pragma solidity ^0.8.18;
 import {Script, console} from "forge-std/Script.sol";
 import {MC3Coin, MC3Treasury} from "../src/MC3Coin_flatten.sol";
 
+
+/* 
+# To deply: 
+
+forge script script/MC3.s.sol:MC3TreasuryScript --rpc-url $SEPOLIA_RPC_URL --private-key $SEPOLIA_PRIVATE_KEY --broadcast
+ 
+ */
+
+
 contract MC3CoinScript is Script {
     MC3Coin public mc3coin;
 
