@@ -1,6 +1,6 @@
 # MC3Coin
 
-A fundraising token for MC3.  Doners can purchase MC3 tokens which will be exchangeable in the future for entry tickets and other perks at  [MC3](https://www.mathculturalcenter.org/the-project).  
+A fundraising [ERC20](https://eips.ethereum.org/EIPS/eip-20) token for MC3.  Doners can purchase MC3 tokens which will be exchangeable in the future for entry tickets and other perks at  [MC3](https://www.mathculturalcenter.org/the-project).  
 
 ### Notes
 
